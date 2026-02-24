@@ -18,7 +18,8 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Load model
 model = tf.keras.models.load_model(
     'saved_models/vit_dataset-1.h5',
-    custom_objects={'TransformerBlock': TransformerBlock}
+    custom_objects={'TransformerBlock': TransformerBlock},
+    compile=False
 )
 
 # Class labels (update if changed)
@@ -78,11 +79,13 @@ def predict():
     true_label = next((i for i, cls in enumerate(class_names) if cls.lower() in filename.lower()), predicted_class)
     save_confusion_matrix(true_label, predicted_class)
 
+    import time
     return render_template(
         'result.html',
         image_path=filename,  # just filename now
         predicted_class=predicted_label,
-        cm_path='static/cm.png'
+        cm_path='static/cm.png',
+        timestamp=int(time.time())
     )
 
 if __name__ == '__main__':

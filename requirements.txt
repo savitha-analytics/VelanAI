@@ -1,6 +1,23 @@
-flask==3.0.3
-tensorflow==2.13.0
+# Web framework
+Flask
+Werkzeug
+
+# Deep Learning (Python 3.10 compatible)
+tensorflow
+keras
+
+# Core scientific stack
 numpy
-Pillow
-matplotlib
 opencv-python
+Pillow
+
+# Visualization
+matplotlib
+seaborn
+
+# ML utilities
+scikit-learn
+tqdm
+
+# Production Server
+gunicorn
