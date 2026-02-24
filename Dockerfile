@@ -1,23 +1,28 @@
+# Use Python 3.10 (TensorFlow compatible)
 FROM python:3.10-slim
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Install system dependencies (important for opencv & tensorflow)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first (for better caching)
 COPY requirements.txt .
 
-# Install dependencies
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
+# Copy all project files
 COPY . .
 
-# Expose the default port (Railway overrides this with PORT env var)
-EXPOSE 5000
+# Expose port (Render uses 10000)
+EXPOSE 10000
 
-# Set environment variables
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
-
-# Run the application with Gunicorn
-CMD gunicorn --bind 0.0.0.0:${PORT:-5000} --timeout 120 app:app
+# Start app
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
