@@ -12,6 +12,7 @@ from models.cnn_vit_model import TransformerBlock  # Register custom layer
 
 # Flask setup
 app = Flask(__name__)
+application = app
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 

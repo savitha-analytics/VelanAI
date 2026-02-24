@@ -21,12 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all project files
 COPY . .
 
-# Expose port (Render uses 10000)
-EXPOSE 10000
-
 # Set environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
 # Run the application with Gunicorn
-CMD gunicorn --bind 0.0.0.0:${PORT:-10000} --timeout 120 app:app
+CMD gunicorn --bind 0.0.0.0:$PORT --timeout 120 app:app
