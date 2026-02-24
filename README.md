@@ -237,10 +237,7 @@ Key dependencies include:
 
 ---
 
-## ✍️ Author
 
-**Aamer Khan**  
-[Contact via Kaggle Profile](https://www.kaggle.com/khanaamer)
 
 ---
 
