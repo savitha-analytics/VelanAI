@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Prediction Result</h1>
+
+    <h2>Uploaded Image</h2>
+    <img src="{{ url_for('static', filename='uploads/' + image_path.split('/')[-1]) }}" alt="Uploaded Image" width="256" height="256">
+
+    <h2>Predicted Class:</h2>
+    <div class="result">{{ predicted_class }}</div>
+
+    <h2>Confusion Matrix</h2>
+    <img src="{{ url_for('static', filename='cm.png') }}" alt="Confusion Matrix" class="cm-image">
+
+    <a href="{{ url_for('index') }}" class="btn">🔁 Try Another Image</a>
+  </div>
+</body>
+</html>
