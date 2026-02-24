@@ -24,5 +24,9 @@ COPY . .
 # Expose port (Render uses 10000)
 EXPOSE 10000
 
-# Start app
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Set environment variables
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
+
+# Run the application with Gunicorn
+CMD gunicorn --bind 0.0.0.0:${PORT:-10000} --timeout 120 app:app
